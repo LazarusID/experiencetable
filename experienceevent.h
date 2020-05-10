@@ -5,10 +5,14 @@
 
 using namespace std;
 
-struct {
+struct experienceevent {
     string character;
     unsigned int points;
     string reason;
 };
+
+bool operator==(const experienceevent& lhs, const experienceevent& rhs);
+
+bool operator<(const experienceevent& lhs, const experienceevent& rhs); 
 
 #endif
