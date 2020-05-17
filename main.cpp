@@ -20,7 +20,7 @@ int main(int argc, const char **argv) {
 
     cout << out.c_str() << endl;
 
-    YAML::Node src = YAML::LoadFile("experience.yaml");
+    YAML::Node src = YAML::LoadFile("gameday1.yaml");
 
     experienceevent event = src.as<experienceevent>();
 

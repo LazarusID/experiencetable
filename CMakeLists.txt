@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.7)
 project(experiencetab LANGUAGES CXX)
 
 include(FetchContent)
+include(CTest)
 
 FetchContent_Declare(
   googletest
@@ -21,7 +22,9 @@ FetchContent_MakeAvailable(yamlcpp)
 add_executable(${PROJECT_NAME}
 
 	experienceevent.cpp main.cpp
-)
+		gameday.cpp gameday.h)
+
+add_subdirectory(test)
 
 add_dependencies(${PROJECT_NAME}
 	yaml-cpp
