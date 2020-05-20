@@ -5,16 +5,16 @@
 #ifndef EXPERIENCETAB_GAMEDAY_H
 #define EXPERIENCETAB_GAMEDAY_H
 
+#include "experienceevent.h"
 #include <string>
 #include <vector>
-#include "experienceevent.h"
 
 class gameday {
 public:
-    std::string session;
-    std::vector<experienceevent> events;
+  std::string session;
+  std::vector<experienceevent> events;
 };
 
-bool operator==(gameday const& lhs, gameday const& rhs);
+bool operator==(gameday const &lhs, gameday const &rhs);
 
-#endif //EXPERIENCETAB_GAMEDAY_H
+#endif // EXPERIENCETAB_GAMEDAY_H

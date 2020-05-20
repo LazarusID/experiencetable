@@ -9,6 +9,7 @@ file(GLOB TEST_SOURCES
         )
 
 set(SUT
+        ../daysummary.cpp
         ../gameday.cpp
         ../experienceevent.cpp
         )

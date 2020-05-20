@@ -6,13 +6,18 @@
 using namespace std;
 
 struct experienceevent {
-    string character;
-    unsigned int points;
-    string reason;
+
+  experienceevent() : character(""), points(0), reason(""){};
+  experienceevent(string c, unsigned int p, string r)
+      : character(c), points(p), reason(r){};
+
+  string character;
+  unsigned int points;
+  string reason;
 };
 
-bool operator==(const experienceevent& lhs, const experienceevent& rhs);
+bool operator==(const experienceevent &lhs, const experienceevent &rhs);
 
-bool operator<(const experienceevent& lhs, const experienceevent& rhs); 
+bool operator<(const experienceevent &lhs, const experienceevent &rhs);
 
 #endif
