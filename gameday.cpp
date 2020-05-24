@@ -4,6 +4,6 @@
 
 #include "gameday.h"
 
-bool operator==(gameday const& lhs, gameday const& rhs) {
-    return lhs.session == rhs.session;
+bool operator==(gameday const &lhs, gameday const &rhs) {
+  return lhs.filename == rhs.filename;
 }

@@ -10,8 +10,8 @@ TEST(gameday_suite, identical_sessions_are_equal) {
   gameday left;
   gameday right;
 
-  left.session = "You're in a tavern";
-  right.session = "You're in a tavern";
+  left.filename = "You're in a tavern";
+  right.filename = "You're in a tavern";
 
   ASSERT_TRUE(left == right);
 }
@@ -21,8 +21,8 @@ TEST(gameday_suite, non_matching_sessions_are_not_equal) {
   gameday left;
   gameday right;
 
-  left.session = "You're in a tavern";
-  right.session = "Roll for initiative";
+  left.filename = "You're in a tavern";
+  right.filename = "Roll for initiative";
 
   ASSERT_FALSE(left == right);
 }

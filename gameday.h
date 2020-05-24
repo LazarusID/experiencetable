@@ -6,12 +6,13 @@
 #define EXPERIENCETAB_GAMEDAY_H
 
 #include "experienceevent.h"
+#include <iostream>
 #include <string>
 #include <vector>
 
 class gameday {
 public:
-  std::string session;
+  std::string filename;
   std::vector<experienceevent> events;
 };
 
