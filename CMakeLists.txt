@@ -30,3 +30,9 @@ add_dependencies(${PROJECT_NAME}
 	yaml-cpp
 	)
 target_link_libraries(${PROJECT_NAME} yaml-cpp)
+
+set(EXAMPLE_DIR ${PROJECT_SOURCE_DIR}/examples)
+
+add_test(NAME load-1-file 
+	COMMAND ${PROJECT_NAME} ${EXAMPLE_DIR}/experience.yaml | diff experience.txt
+)
