@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./experiencetab $1 | diff - $2
+./experiencetable $1 | diff - $2
