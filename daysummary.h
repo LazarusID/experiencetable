@@ -12,6 +12,7 @@ public:
 
   DaySummary(){};
   DaySummary(const gameday &g);
+  DaySummary(const vector<gameday> &gamelist);
 
   int operator[](const std::string x) const {
     if (totals.find(x) == totals.end()) {
@@ -25,6 +26,8 @@ public:
 
 private:
   std::map<std::string, int> totals;
+
+  void add_summary(const gameday &);
 };
 
 #endif

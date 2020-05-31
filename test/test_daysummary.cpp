@@ -46,7 +46,7 @@ TEST(
   ASSERT_EQ(15, s["Hermione"]);
 }
 
-TEST(daysummery_suite, given_gameday_can_iterate_over_all_members) {
+TEST(daysummary_suite, given_gameday_can_iterate_over_all_members) {
   gameday g;
 
   g.events.push_back(experienceevent("Ron", 1, "For being ron"));
@@ -79,4 +79,30 @@ TEST(daysummery_suite, given_gameday_can_iterate_over_all_members) {
   ASSERT_TRUE(harry);
   ASSERT_TRUE(hermione);
   ASSERT_TRUE(ginny);
+}
+
+TEST(daysummary_suite, given_vector_of_gamedays_summarizes_all_members) {
+  gameday g1;
+  gameday g2;
+
+  g1.events.push_back(experienceevent("Ron", 1, "For being ron"));
+  g1.events.push_back(experienceevent("Harry", 2, "Pure pluck"));
+  g1.events.push_back(
+      experienceevent("Hermione", 10, "Saving these two knuckleheads"));
+  g1.events.push_back(experienceevent("Ginny", 4, "Cuteness"));
+
+  g2.events.push_back(experienceevent("Ron", 5, "For being ron"));
+  g2.events.push_back(experienceevent("Harry", 6, "Pure pluck"));
+  g2.events.push_back(
+      experienceevent("Hermione", 5, "Saving these two knuckleheads"));
+  g2.events.push_back(experienceevent("Ginny", 1, "Cuteness"));
+
+  vector<gameday> campaign = {g1, g2};
+
+  DaySummary s(campaign);
+
+  ASSERT_EQ(6, s["Ron"]);
+  ASSERT_EQ(8, s["Harry"]);
+  ASSERT_EQ(15, s["Hermione"]);
+  ASSERT_EQ(5, s["Ginny"]);
 }
