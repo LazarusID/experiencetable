@@ -1,6 +1,8 @@
 #include "experienceevent.h"
 #include <yaml-cpp/yaml.h>
 
+#include <iostream>
+
 namespace YAML {
 template <> struct convert<gameday> {
 

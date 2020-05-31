@@ -12,6 +12,8 @@ namespace fs = std::filesystem;
 
 using namespace std;
 
+void display_summary(DaySummary &);
+
 int main(int argc, const char **argv) {
 
   try {
@@ -26,27 +28,48 @@ int main(int argc, const char **argv) {
       return 1;
     }
 
-    YAML::Node n = YAML::LoadFile(argv[1]);
-    gameday g = n.as<gameday>();
+    if (fs::is_directory(argv[1])) {
 
-    DaySummary d(g);
+      vector<gameday> campaign;
 
-    int max = 0;
-    for (auto p : d) {
-      if (p.first.length() > max) {
-        max = p.first.length();
+      for (auto e : fs::directory_iterator(argv[1])) {
+        if (e.path().extension().string() == ".yaml") {
+          YAML::Node n = YAML::LoadFile(e.path().c_str());
+          gameday g = n.as<gameday>();
+          campaign.push_back(g);
+        }
       }
-    }
 
-    string label;
-    for (auto p : d) {
-      label = p.first + ":";
-      cout << setw(max + 1) << left << label << " " << p.second << endl;
+      DaySummary d(campaign);
+
+      display_summary(d);
+    } else {
+      YAML::Node n = YAML::LoadFile(argv[1]);
+      gameday g = n.as<gameday>();
+
+      DaySummary d(g);
+
+      display_summary(d);
     }
 
     return 0;
   } catch (exception e) {
     cerr << e.what() << endl;
     return 1;
+  }
+}
+
+void display_summary(DaySummary &d) {
+  int max = 0;
+  for (auto p : d) {
+    if (p.first.length() > max) {
+      max = p.first.length();
+    }
+  }
+
+  string label;
+  for (auto p : d) {
+    label = p.first + ":";
+    cout << setw(max + 1) << left << label << " " << p.second << endl;
   }
 }

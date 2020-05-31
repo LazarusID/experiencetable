@@ -57,3 +57,7 @@ set(TEST_OUTPUT ${PROJECT_SOURCE_DIR}/testoutput.sh)
 add_test(NAME load-1-file 
 	COMMAND ${TEST_OUTPUT} ${EXAMPLE_DIR}/experience.yaml ${EXAMPLE_DIR}/oneday.txt
 )
+
+add_test(NAME load-campaign
+	COMMAND ${TEST_OUTPUT} ${EXAMPLE_DIR} ${EXAMPLE_DIR}/campaign.txt
+)

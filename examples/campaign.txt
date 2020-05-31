@@ -1,0 +1,4 @@
+Ginny:    4
+Harry:    9
+Hermione: 10
+Ron:      5
