@@ -1,14 +1,13 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.17)
+
 
 project(experiencetable LANGUAGES CXX VERSION 0.8)
 
 include(FetchContent)
 include(CTest)
-include(CPack)
 
-set(YAML_CPP_BUILD_TESTS off)
-set(YAML_CPP_BUILD_TOOLS off)
-set(YAML_CPP_INSTALL off)
+cmake_policy(SET CMP0077 NEW)
+configure_file(installer.nsis.in installer.nsi)
 
 FetchContent_Declare(
   googletest
@@ -17,13 +16,23 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+
+set(YAML_CPP_BUILD_TESTS off)
+set(YAML_CPP_BUILD_TOOLS off)
+set(YAML_CPP_INSTALL off)
+
 FetchContent_Declare(
 	yamlcpp
 	GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
 	GIT_TAG yaml-cpp-0.6.3
 )
-FetchContent_MakeAvailable(yamlcpp)
 
+FetchContent_GetProperties(yamlcpp)
+if (NOT yamlcpp_POPULATED)
+	FetchContent_Populate(yamlcpp)
+	cmake_policy(SET CMP0077 NEW)
+	add_subdirectory(${yamlcpp_SOURCE_DIR} ${yamlcpp_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
 
 add_executable(${PROJECT_NAME}
 	experienceevent.cpp 
@@ -48,12 +57,3 @@ set(TEST_OUTPUT ${PROJECT_SOURCE_DIR}/testoutput.sh)
 add_test(NAME load-1-file 
 	COMMAND ${TEST_OUTPUT} ${EXAMPLE_DIR}/experience.yaml ${EXAMPLE_DIR}/oneday.txt
 )
-
-set(CPACK_PACKAGE_NAME experience_table)
-set(CPACK_PACKAGE_DESCRIPTION "Generates experience summaries from simple yaml files")
-set(CPACK_PACKAGE_DIRECTORY "experiencetable")
-set(CPACK_NSIS_MODIFY_PATH ON)
-set(CPACK_NSIS_COMPRESSOR lzma)
-
-install(TARGETS ${PROJECT_NAME} )
-install(FILES README.md TYPE BIN) 

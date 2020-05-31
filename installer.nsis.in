@@ -1,0 +1,19 @@
+OutFile "@PROJECT_NAME@-@PROJECT_VERSION@+@CMAKE_SYSTEM_NAME@.exe"
+
+InstallDir $PROGRAMFILES64\experiencetable
+
+Page directory
+Page instfiles
+
+Section
+
+SetOutPath $INSTDIR
+
+File experiencetable.exe
+File C:\Windows\System32\VCRUNTIME140.dll
+File C:\Windows\System32\MSVCP140.dll
+File C:\Windows\System32\ucrtbase.dll
+
+EnVar::AddValue PATH $INSTDIR
+
+SectionEnd
