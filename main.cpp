@@ -7,12 +7,15 @@
 #include <iomanip>
 #include <ios>
 #include <iostream>
+#include <string>
 
 namespace fs = std::filesystem;
 
 using namespace std;
 
 void display_summary(DaySummary &);
+
+vector<gameday> &load_gamedays(vector<string> &paths);
 
 int main(int argc, const char **argv) {
 
@@ -28,35 +31,41 @@ int main(int argc, const char **argv) {
       return 1;
     }
 
+    vector<gameday> campaign;
+    vector<string> gamefiles;
+
     if (fs::is_directory(argv[1])) {
-
-      vector<gameday> campaign;
-
       for (auto e : fs::directory_iterator(argv[1])) {
         if (e.path().extension().string() == ".yaml") {
-          YAML::Node n = YAML::LoadFile(e.path().c_str());
-          gameday g = n.as<gameday>();
-          campaign.push_back(g);
+          gamefiles.push_back(e.path().c_str());
         }
       }
-
-      DaySummary d(campaign);
-
-      display_summary(d);
     } else {
-      YAML::Node n = YAML::LoadFile(argv[1]);
-      gameday g = n.as<gameday>();
-
-      DaySummary d(g);
-
-      display_summary(d);
+      gamefiles.push_back(argv[1]);
     }
 
+    campaign = load_gamedays(gamefiles);
+    DaySummary d(campaign);
+    display_summary(d);
+
     return 0;
-  } catch (exception e) {
+  } catch (exception &e) {
     cerr << e.what() << endl;
     return 1;
   }
+}
+
+vector<gameday> &load_gamedays(vector<string> &paths) {
+  static vector<gameday> campaign;
+
+  campaign.clear();
+  for (auto filename : paths) {
+    YAML::Node n = YAML::LoadFile(filename);
+    gameday g = n.as<gameday>();
+    campaign.push_back(g);
+  }
+
+  return campaign;
 }
 
 void display_summary(DaySummary &d) {
