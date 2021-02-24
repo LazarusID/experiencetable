@@ -4,49 +4,82 @@
 #include "gameday.h"
 #include "gamedayconverter.h"
 #include <filesystem>
+#include <functional>
 #include <iomanip>
 #include <ios>
 #include <iostream>
 #include <string>
+#include <getopt.h>
 
 namespace fs = std::filesystem;
 
 using namespace std;
 
 void display_summary(DaySummary &);
+void display_summary_md(DaySummary &d);
 
 vector<gameday> &load_gamedays(vector<string> &paths);
 
-int main(int argc, const char **argv) {
+void usage() {
+    cerr << "usage:" << endl
+         << "experiencetable [--markdown] (source.yaml|sourcedir) " << endl;
+}
+
+int main(int argc, char *const *argv) {
+
+    std::function<void(DaySummary&)> display_delegate = display_summary;
+    static struct option long_options[] = {
+            {"markdown", no_argument, 0, 'm'},
+            {0, 0, 0, 0}
+    };
+    int opt;
+    const char *source = nullptr;
+
+    while((opt = getopt_long(argc, reinterpret_cast<char *const *>(argv), "mh", long_options, 0)) != -1) {
+        switch(opt) {
+            case 'm':
+                display_delegate = display_summary_md;
+                break;
+            case 'h':
+            case '?':
+                usage();
+                return EXIT_FAILURE;
+        }
+    }
+
+    if (optind < argc) {
+        source = argv[optind];
+    }
+
+    if (nullptr == source) {
+        usage();
+        return EXIT_FAILURE;
+    }
+
+    if (!fs::exists(source)) {
+        cerr << "File " << source << " does not exist." << endl;
+        return 1;
+    }
 
   try {
-
-    if (argc < 2) {
-      cerr << "usage: " << argv[0] << " file.yaml" << endl;
-      return 1;
-    }
-
-    if (!fs::exists(argv[1])) {
-      cerr << "File " << argv[1] << " does not exist." << endl;
-      return 1;
-    }
+      
 
     vector<gameday> campaign;
     vector<string> gamefiles;
 
-    if (fs::is_directory(argv[1])) {
-      for (auto e : fs::directory_iterator(argv[1])) {
+    if (fs::is_directory(source)) {
+      for (auto e : fs::directory_iterator(source)) {
         if (e.path().extension().string() == ".yaml") {
           gamefiles.push_back(e.path().c_str());
         }
       }
     } else {
-      gamefiles.push_back(argv[1]);
+      gamefiles.push_back(source);
     }
 
     campaign = load_gamedays(gamefiles);
     DaySummary d(campaign);
-    display_summary(d);
+    display_delegate(d);
 
     return 0;
   } catch (exception &e) {
@@ -81,4 +114,22 @@ void display_summary(DaySummary &d) {
     label = p.first + ":";
     cout << setw(max + 1) << left << label << " " << p.second << endl;
   }
+}
+
+void display_summary_md(DaySummary &d) {
+    int max = 0;
+    for (auto p : d) {
+        if (p.first.length() > max) {
+            max = p.first.length();
+        }
+    }
+
+    cout << "| Character | XP  |" << endl
+         << "| --------- | --- |" << endl;
+
+    string label;
+    for (auto p : d) {
+        label = p.first;
+        cout << "| " << setw(max) << left << label << " | " << p.second << " |" << endl;
+    }
 }

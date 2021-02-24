@@ -1,0 +1,5 @@
+| Character | XP  |
+| --------- | --- |
+| Harry    | 2 |
+| Hermione | 3 |
+| Ron      | 1 |

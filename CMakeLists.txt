@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16)
 
 
 project(experiencetable LANGUAGES CXX VERSION 0.8)
@@ -55,9 +55,13 @@ set(EXAMPLE_DIR ${PROJECT_SOURCE_DIR}/examples)
 set(TEST_OUTPUT ${PROJECT_SOURCE_DIR}/testoutput.sh)
 
 add_test(NAME load-1-file 
-	COMMAND ${TEST_OUTPUT} ${EXAMPLE_DIR}/experience.yaml ${EXAMPLE_DIR}/oneday.txt
+	COMMAND ${TEST_OUTPUT} --source=${EXAMPLE_DIR}/experience.yaml --expected=${EXAMPLE_DIR}/oneday.txt
 )
 
 add_test(NAME load-campaign
-	COMMAND ${TEST_OUTPUT} ${EXAMPLE_DIR} ${EXAMPLE_DIR}/campaign.txt
+	COMMAND ${TEST_OUTPUT} --source=${EXAMPLE_DIR} --expected=${EXAMPLE_DIR}/campaign.txt
 )
+
+add_test(NAME markdown-day
+		COMMAND ${TEST_OUTPUT} --markdown --source=${EXAMPLE_DIR}/experience.yaml --expected=${EXAMPLE_DIR}/oneday.md
+		)
