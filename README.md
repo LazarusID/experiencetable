@@ -27,7 +27,35 @@ And produces a summary of the experience which looks like:
 
 During the game session, record experience as it happens using your favorite text editor.  Make sure the file is valid yaml.  To report experience totals at the end of the session, run:
 
-./experiencetab todays-experience-file.yaml
+    ./experiencetab todays-experience-file.yaml
+
+## Running Your Campaign
+
+If you keep all of your experience files in a single folder, you can generate an experience summary for your entire campaign with:
+
+    ./experiencetab experiencefolder
+
+If you maintain a campaign website or wiki that uses markdown format, you can have output in markdown:
+
+    ./experiencetab --markdown experiencefolder
+
+The output will look something like:
+
+    | Character | XP  |
+    | --------- | --- |
+    | Harry    | 2 |
+    | Hermione | 3 |
+    | Ron      | 1 |
+
+It will render like:
+
+| Character | XP  |
+| --------- | --- |
+| Harry    | 2 |
+| Hermione | 3 |
+| Ron      | 1 |
+
+
 
 ## Building
 
@@ -39,7 +67,7 @@ You will need:
 
 * Make
 
-### Configuring
+### Configuring The Build
 
 Create a folder below or outside of the root of your file checkout or archive expansion.  I usually create "build" below the root fo the repository.
 
@@ -49,6 +77,8 @@ Create a folder below or outside of the root of your file checkout or archive ex
 Inside of the build folder, run 
 
     cmake -DYAML_CPP_BUILD_TESTS=off -DYAML_CPP_BUILD_TOOLS=off ..
+
+If you are windows and you are not using Visual Studio, you will need to add `-G "Unix Makefiles"` to the cmake command.  If you are using Visual Studio, skip the build step here and build inside Visual Studio.
 
 Build and confirm a good build with the included test suite.
 
