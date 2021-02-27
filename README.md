@@ -56,12 +56,28 @@ It will render like:
 | Ron      | 1 |
 
 
+### Campaign Website
+
+If you maintain a campaign website, the `campaignexperience.sh` script
+can be used to generate a markdown page that most static site generator
+systems will understand.  The file includes instructions for modifying
+the file as needed.
+
+    campaignexperience.sh campaign-experience-file-directory
+
+If you are using a Windows system, you will need to run this script in a
+bash shell, or under the Windows Subsystem for Linux.
+
 
 ## Building
 
 You will need:
 
-* CMake version 3.13 or better (latest is bestest).  Be aware that Linux distributions tend to ship CMake well behind the development curve, so don't assume that just because you have the latest Linux you've got a recent enough CMake.  The good news is that it's very easy to build the latest CMake from source and install it on your system.
+* CMake version 3.16 or better (latest is bestest).  Be aware that Linux
+  distributions tend to ship CMake well behind the development curve, so
+  don't assume that just because you have the latest Linux you've got a
+  recent enough CMake.  The good news is that it's very easy to build the
+  latest CMake from source and install it on your system.
 
 * Version 9+ of GCC or CLang, so that you have support for the c++ filesystem library.
 
