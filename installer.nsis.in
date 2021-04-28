@@ -10,9 +10,7 @@ Section
 SetOutPath $INSTDIR
 
 File experiencetable.exe
-File C:\Windows\System32\VCRUNTIME140.dll
-File C:\Windows\System32\MSVCP140.dll
-File C:\Windows\System32\ucrtbase.dll
+File C:\Windows\System32\msvcrt.dll
 
 EnVar::AddValue PATH $INSTDIR
 
