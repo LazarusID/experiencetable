@@ -1,12 +1,5 @@
-- character: Ron
-  points: 1
-  reason: Critical failure on Expeliarimus
-- character: Harry
-  points: 2
-  reason: Critical failure to resist On The Edge
-- character: Hermione
-  points: 1
-  reason: Saving these two knuckleheads.
-- character: Hermione
-  points: 2
-  reason: Saving these two knuckleheads.  Again.
+
+  Ron 1 Critical failure on Expeliarimus
+  Harry 2 Critical failure to resist On The Edge
+  Hermione 1 Saving these two knuckleheads.
+  Hermione 2 Saving these two knuckleheads.  Again.

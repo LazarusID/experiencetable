@@ -16,23 +16,17 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-
-set(YAML_CPP_BUILD_TESTS off)
-set(YAML_CPP_BUILD_TOOLS off)
-set(YAML_CPP_INSTALL off)
-
 FetchContent_Declare(
-	yamlcpp
-	GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
-	GIT_TAG yaml-cpp-0.6.3
+	boost
+	GIT_REPOSITORY  https://github.com/boostorg/boost.git
+	GIT_TAG			boost-1.76.0
 )
-
-FetchContent_GetProperties(yamlcpp)
-if (NOT yamlcpp_POPULATED)
-	FetchContent_Populate(yamlcpp)
-	cmake_policy(SET CMP0077 NEW)
-	add_subdirectory(${yamlcpp_SOURCE_DIR} ${yamlcpp_BINARY_DIR} EXCLUDE_FROM_ALL)
+FetchContent_GetProperties(boost)
+if(NOT boost_POPULATED)
+  FetchContent_Populate(boost)
 endif()
+
+include_directory(${boost_SOURCE_DIR})
 
 add_executable(${PROJECT_NAME}
 	experienceevent.cpp 
@@ -45,10 +39,6 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 add_subdirectory(test)
 
-add_dependencies(${PROJECT_NAME}
-	yaml-cpp
-	)
-target_link_libraries(${PROJECT_NAME} yaml-cpp)
 
 set(EXAMPLE_DIR ${PROJECT_SOURCE_DIR}/examples)
 
