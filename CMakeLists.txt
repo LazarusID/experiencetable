@@ -26,7 +26,7 @@ if(NOT boost_POPULATED)
   FetchContent_Populate(boost)
 endif()
 
-include_directory(${boost_SOURCE_DIR})
+include_directories(${boost_SOURCE_DIR})
 
 add_executable(${PROJECT_NAME}
 	experienceevent.cpp 

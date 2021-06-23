@@ -1,8 +1,6 @@
 #include "daysummary.h"
-#include "experienceconverter.h"
 #include "experienceevent.h"
 #include "gameday.h"
-#include "gamedayconverter.h"
 #include <filesystem>
 #include <functional>
 #include <getopt.h>

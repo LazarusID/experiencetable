@@ -10,9 +10,9 @@ namespace ast {
 
 struct experienceevent {
 
-  experienceevent() : character(""), points(0), reason(""){};
-  experienceevent(string c, unsigned int p, string r)
-      : character(c), points(p), reason(r){};
+  experienceevent() : name(""), points(0), reason(""){};
+  experienceevent(std::string c, unsigned int p, std::string r)
+      : name(c), points(p), reason(r){};
 
   std::string name;
   unsigned int points;

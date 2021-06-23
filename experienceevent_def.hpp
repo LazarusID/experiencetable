@@ -25,7 +25,7 @@ x3::rule<class experienceevent, ast::experienceevent> const experienceevent =
 auto const quoted_string = lexeme['"' >> +(char_ - '"') >> '"'];
 auto const ident = lexeme[alpha >> *alnum];
 
-auto const experienceevent_def = ident >> int_;
+auto const experienceevent_def = ident >> int_ >> -quoted_string;
 
 } // namespace parser
 } // namespace client
