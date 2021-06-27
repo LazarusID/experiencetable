@@ -13,7 +13,7 @@
 class gameday {
 public:
   std::string filename;
-  std::vector<experienceevent> events;
+  std::vector<client::ast::experienceevent> events;
 };
 
 bool operator==(gameday const &lhs, gameday const &rhs);

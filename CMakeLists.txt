@@ -16,17 +16,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-FetchContent_Declare(
-	boost
-	GIT_REPOSITORY  https://github.com/boostorg/boost.git
-	GIT_TAG			boost-1.76.0
-)
-FetchContent_GetProperties(boost)
-if(NOT boost_POPULATED)
-  FetchContent_Populate(boost)
-endif()
-
-include_directories(${boost_SOURCE_DIR})
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME}
 	experienceevent.cpp 

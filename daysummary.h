@@ -8,11 +8,11 @@
 
 class DaySummary {
 public:
-  using const_iterator = map<std::string, int>::const_iterator;
+  using const_iterator = std::map<std::string, int>::const_iterator;
 
   DaySummary(){};
   DaySummary(const gameday &g);
-  DaySummary(const vector<gameday> &gamelist);
+  DaySummary(const std::vector<gameday> &gamelist);
 
   int operator[](const std::string x) const {
     if (totals.find(x) == totals.end()) {

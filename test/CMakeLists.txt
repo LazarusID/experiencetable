@@ -2,7 +2,7 @@ include(GoogleTest)
 
 set(TEST_NAME ${PROJECT_NAME}-test)
 
-include_directories(..)
+include_directories(.. ${Boost_INCLUDE_DIRS})
 
 file(GLOB TEST_SOURCES
         "*.cpp"
