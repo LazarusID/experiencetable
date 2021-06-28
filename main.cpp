@@ -1,9 +1,8 @@
 #include "daysummary.h"
-#include "experienceconverter.h"
 #include "experienceevent.h"
 #include "gameday.h"
-#include "gamedayconverter.h"
 #include <filesystem>
+#include <fstream>
 #include <functional>
 #include <getopt.h>
 #include <iomanip>
@@ -91,8 +90,13 @@ vector<gameday> &load_gamedays(vector<string> &paths) {
 
   campaign.clear();
   for (auto filename : paths) {
-    YAML::Node n = YAML::LoadFile(filename);
-    gameday g = n.as<gameday>();
+    gameday g;
+    experienceevent ev;
+    ifstream in(filename);
+    while (in) {
+      in >> ev;
+      g.events.push_back(ev);
+    }
     campaign.push_back(g);
   }
 

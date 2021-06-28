@@ -1,28 +1,24 @@
 include(GoogleTest)
 
-set(TEST_NAME ${PROJECT_NAME}-test)
-
 include_directories(..)
 
 file(GLOB TEST_SOURCES
         "*.cpp"
         )
 
-set(SUT
+add_executable(daysummary-test
         ../daysummary.cpp
-        ../gameday.cpp
+        test_daysummary.cpp
+        )
+add_executable(experienceevent-test
         ../experienceevent.cpp
+        test_experienceevent.cpp
         )
 
-add_executable(${TEST_NAME}
-        ${TEST_SOURCES}
-        ${SUT}
-        )
-target_link_libraries(${TEST_NAME}
-        gtest
-        gtest_main
-        yaml-cpp
-        )
-target_compile_features(${TEST_NAME} PUBLIC cxx_override)
+set_property(TARGET daysummary-test PROPERTY CXX_STANDARD 17)
+set_property(TARGET experienceevent-test PROPERTY CXX_STANDARD 17)
 
-gtest_discover_tests(${TEST_NAME})
+add_test(NAME ExperienceEvent
+        COMMAND experiencevent-test)
+add_test(NAME DaySummary
+        COMMAND daysummary-test)
