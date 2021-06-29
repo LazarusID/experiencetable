@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 
-project(experiencetable LANGUAGES CXX VERSION 1.0)
+project(experiencetable LANGUAGES CXX VERSION 1.1)
 
 include(FetchContent)
 include(CTest)
@@ -25,7 +25,7 @@ set(EXAMPLE_DIR ${PROJECT_SOURCE_DIR}/examples)
 set(TEST_OUTPUT ${PROJECT_SOURCE_DIR}/testoutput.sh)
 
 add_test(NAME load-1-file 
-	COMMAND ${TEST_OUTPUT} --source=${EXAMPLE_DIR}/experience.yaml --expected=${EXAMPLE_DIR}/oneday.txt
+	COMMAND ${TEST_OUTPUT} --source=${EXAMPLE_DIR}/experience.txt --expected=${EXAMPLE_DIR}/oneday.txt
 )
 
 add_test(NAME load-campaign
@@ -33,5 +33,5 @@ add_test(NAME load-campaign
 )
 
 add_test(NAME markdown-day
-		COMMAND ${TEST_OUTPUT} --markdown --source=${EXAMPLE_DIR}/experience.yaml --expected=${EXAMPLE_DIR}/oneday.md
+		COMMAND ${TEST_OUTPUT} --markdown --source=${EXAMPLE_DIR}/experience.txt --expected=${EXAMPLE_DIR}/oneday.md
 		)

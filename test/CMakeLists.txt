@@ -19,6 +19,6 @@ set_property(TARGET daysummary-test PROPERTY CXX_STANDARD 17)
 set_property(TARGET experienceevent-test PROPERTY CXX_STANDARD 17)
 
 add_test(NAME ExperienceEvent
-        COMMAND experiencevent-test)
+        COMMAND experienceevent-test)
 add_test(NAME DaySummary
         COMMAND daysummary-test)
