@@ -2,9 +2,9 @@ include(GoogleTest)
 
 include_directories(..)
 
-file(GLOB TEST_SOURCES
-        "*.cpp"
-        )
+add_executable(compareoutput
+        compareoutput.cpp
+)
 
 add_executable(daysummary-test
         ../daysummary.cpp

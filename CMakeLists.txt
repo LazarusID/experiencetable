@@ -20,18 +20,20 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 add_subdirectory(test)
 	
-set(EXAMPLE_DIR ${PROJECT_SOURCE_DIR}/examples)
+set(EXAMPLE_DIR ${PROJECT_SOURCE_DIR}/examples/src)
+set(EXPECTED_DIR ${PROJECT_SOURCE_DIR}/examples/expected)
 
-set(TEST_OUTPUT ${PROJECT_SOURCE_DIR}/testoutput.sh)
+set(TEST_OUTPUT ${PROJECT_BINARY_DIR}/test/compareoutput${CMAKE_EXECUTABLE_SUFFIX})
+set(SYSTEM_UNDER_TEST ${PROJECT_BINARY_DIR}/${PROJECT_NAME}${CMAKE_EXECUTABLE_SUFFIX})
 
 add_test(NAME load-1-file 
-	COMMAND ${TEST_OUTPUT} --source=${EXAMPLE_DIR}/experience.txt --expected=${EXAMPLE_DIR}/oneday.txt
+	COMMAND ${SYSTEM_UNDER_TEST} ${EXAMPLE_DIR}/experience.txt | ${TEST_OUTPUT} ${EXPECTED_DIR}/oneday.txt
 )
 
 add_test(NAME load-campaign
-	COMMAND ${TEST_OUTPUT} --source=${EXAMPLE_DIR} --expected=${EXAMPLE_DIR}/campaign.txt
+	COMMAND ${SYSTEM_UNDER_TEST} ${EXAMPLE_DIR} | ${TEST_OUTPUT} ${EXPECTED_DIR}/campaign.txt
 )
 
 add_test(NAME markdown-day
-		COMMAND ${TEST_OUTPUT} --markdown --source=${EXAMPLE_DIR}/experience.txt --expected=${EXAMPLE_DIR}/oneday.md
+		COMMAND ${SYSTEM_UNDER_TEST} --markdown ${EXAMPLE_DIR}/experience.txt | ${TEST_OUTPUT} ${EXPECTED_DIR}/oneday.md
 		)

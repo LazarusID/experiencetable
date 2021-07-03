@@ -15,7 +15,14 @@ istream &operator>>(istream &in, experienceevent &e) {
     if (in) {
         in >> e.character;
     }
-    if (in) in >> e.points;
+    if (in) {
+        in >> e.points;
+    } else {
+        e.character = "";
+        e.points = 0;
+        e.reason = "";
+    }
+
     if (in) {
         string reason;
         getline(in, reason);

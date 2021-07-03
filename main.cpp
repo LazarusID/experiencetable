@@ -23,7 +23,7 @@ vector<gameday> &load_gamedays(vector<string> &paths);
 
 void usage() {
   cerr << "usage:" << endl
-       << "experiencetable [--markdown] (source.yaml|sourcedir) " << endl;
+       << "experiencetable [--markdown] (source.txt|sourcedir) " << endl;
 }
 
 int main(int argc, char *const *argv) {
@@ -63,10 +63,12 @@ int main(int argc, char *const *argv) {
   try {
     vector<gameday> campaign;
     vector<string> gamefiles;
+    string extension;
 
     if (fs::is_directory(source)) {
       for (auto e : fs::directory_iterator(source)) {
-        if (e.path().extension().string() == ".yaml") {
+        extension = e.path().extension().string();
+        if (extension == ".txt") {
           gamefiles.push_back(e.path().string());
         }
       }
