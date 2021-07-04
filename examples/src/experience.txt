@@ -1,0 +1,4 @@
+Ron		1	Critical failure on Expeliarimus
+Harry		2	Critical failure to resist On The Edge
+Hermione	1	Saving these two knuckleheads
+Hermione	2	Saving these two knuckleheads.  Again.

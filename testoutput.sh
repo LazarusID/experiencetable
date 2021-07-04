@@ -22,4 +22,4 @@ while test $# -gt 0; do
   esac
 done
 
-./experiencetable $OUTPUTFORMAT $SOURCE | diff - $EXPECTED
+./experiencetable $OUTPUTFORMAT $SOURCE | ./test/compareoutput $EXPECTED

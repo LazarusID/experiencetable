@@ -1,0 +1,5 @@
+Ron		4	Actually did some good magic.
+Hermione	5	The usual, knowing stuff.
+Harry		7	Thrilling heroics to rescue, well, everyone
+Hermione	2	Stopped Harry & Ron from getting killed.
+Ginny		4	Kept Harry from doing something really stupid.

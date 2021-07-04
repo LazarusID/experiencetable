@@ -34,7 +34,7 @@ echo
 experiencetable --markdown $FILES
 echo
 
-for f in `ls -rt ${FILES}/*.yaml`; do
+for f in `ls -rt ${FILES}/*.txt`; do
 	echo -n "## "
 	date -r $f "+%B-%d-%Y"
 	echo

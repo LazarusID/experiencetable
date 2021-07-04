@@ -2,20 +2,18 @@
 
 Total experience for Table Top Role Playing Games (TTRPGs).
 
-This program takes as input a file written in yaml, of the form:
+This program takes as input a file written in text, of the form:
 
-    - character: Ron
-      points: 1
-      reason: Critical failure on Expeliarimus
-    - character: Harry
-      points: 2
-      reason: Critical failure to resist On The Edge
-    - character: Hermione
-      points: 1
-      reason: Saving these two knuckleheads.
-    - character: Hermione
-      points: 2
-      reason: Saving these two knuckleheads.  Again.
+    character points [reason]
+
+The reason is optional.  The character must be a single word without spaces.
+You can use whitespace characters such as spaces and tabs to format the text to
+make it more readable.  For example:
+
+    Ron       1 Critical failure on Expeliarimus
+    Harry     2 Critical failure to resist On The Edge
+    Hermione  1 Saving these two knuckleheads.
+    Hermione  2 Saving these two knuckleheads.  Again.
 
 And produces a summary of the experience which looks like:
 
@@ -26,10 +24,9 @@ And produces a summary of the experience which looks like:
 ## Using It In Play
 
 During the game session, record experience as it happens using your favorite
-text editor.  Make sure the file is valid yaml.  To report experience totals at
-the end of the session, run:
+text editor.  To report experience totals at the end of the session, run:
 
-    ./experiencetab todays-experience-file.yaml
+    ./experiencetab todays-experience-file.txt
 
 ## Running Your Campaign
 
@@ -99,11 +96,12 @@ expansion.  I usually create "build" below the root fo the repository.
 
 Inside of the build folder, run 
 
-    cmake -DYAML_CPP_BUILD_TESTS=off -DYAML_CPP_BUILD_TOOLS=off ..
+    cmake ..
 
 
 If you are windows you will need to add `-G "Unix Makefiles"` to the cmake
-command.  Visual Studio builds are not supported.
+command.  Visual Studio builds are not supported.  You can install a recent
+version of the GNU compiler (which is supported) using chocolatey.
 
 Build and confirm a good build with the included test suite.
 

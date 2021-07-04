@@ -1,9 +1,8 @@
 #include "daysummary.h"
-#include "experienceconverter.h"
 #include "experienceevent.h"
 #include "gameday.h"
-#include "gamedayconverter.h"
 #include <filesystem>
+#include <fstream>
 #include <functional>
 #include <getopt.h>
 #include <iomanip>
@@ -24,7 +23,7 @@ vector<gameday> &load_gamedays(vector<string> &paths);
 
 void usage() {
   cerr << "usage:" << endl
-       << "experiencetable [--markdown] (source.yaml|sourcedir) " << endl;
+       << "experiencetable [--markdown] (source.txt|sourcedir) " << endl;
 }
 
 int main(int argc, char *const *argv) {
@@ -64,10 +63,12 @@ int main(int argc, char *const *argv) {
   try {
     vector<gameday> campaign;
     vector<string> gamefiles;
+    string extension;
 
     if (fs::is_directory(source)) {
       for (auto e : fs::directory_iterator(source)) {
-        if (e.path().extension().string() == ".yaml") {
+        extension = e.path().extension().string();
+        if (extension == ".txt") {
           gamefiles.push_back(e.path().string());
         }
       }
@@ -91,8 +92,14 @@ vector<gameday> &load_gamedays(vector<string> &paths) {
 
   campaign.clear();
   for (auto filename : paths) {
-    YAML::Node n = YAML::LoadFile(filename);
-    gameday g = n.as<gameday>();
+    gameday g;
+    experienceevent ev;
+    ifstream in(filename);
+    while (in) {
+      in >> ev;
+      if (in)
+        g.events.push_back(ev);
+    }
     campaign.push_back(g);
   }
 
