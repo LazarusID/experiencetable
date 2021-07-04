@@ -97,7 +97,8 @@ vector<gameday> &load_gamedays(vector<string> &paths) {
     ifstream in(filename);
     while (in) {
       in >> ev;
-      g.events.push_back(ev);
+      if (in)
+        g.events.push_back(ev);
     }
     campaign.push_back(g);
   }
